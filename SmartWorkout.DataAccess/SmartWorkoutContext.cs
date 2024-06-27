@@ -20,6 +20,9 @@ namespace SmartWorkout.DataAccess
 
         public DbSet<Users> Users { get; set; }
         public DbSet<Workout>   Workouts { get; set; }
+        public DbSet<Exercise> Exercises { get; set; }
+        public DbSet<ExerciseLog> ExerciseLogs { get; set; }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -38,6 +41,8 @@ namespace SmartWorkout.DataAccess
 
             new UserConfiguration().Configure(modelBuilder.Entity<Users>());
             new WorkoutConfiguration().Configure(modelBuilder.Entity<Workout>());
+            new ExerciseConfiguration().Configure(modelBuilder.Entity<Exercise>());
+            new ExerciseLogConfiguration().Configure(modelBuilder.Entity<ExerciseLog>());
         }
 
     }

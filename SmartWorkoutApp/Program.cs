@@ -8,9 +8,11 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
+builder.Services.AddDbContext<SmartWorkoutContext>();
+
 var app = builder.Build();
 
-builder.Services.AddDbContext<SmartWorkoutContext>();
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
