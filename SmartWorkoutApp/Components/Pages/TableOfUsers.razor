@@ -1,0 +1,62 @@
+﻿@page "/user"
+@using SmartWorkout.DataAccess
+@using SmartWorkout.DataAccess.Entities
+@attribute [StreamRendering]
+
+<PageTitle>Users</PageTitle>
+
+<h1>Users</h1>
+
+<p>This component shows data of all USERS.</p>
+
+@if (ListOfUsers == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>Phone number</th>
+                <th>Email</th>
+                <th>Age</th>
+                <th>Weight</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in ListOfUsers)
+            {
+                <tr>
+                    <td>@user.Id</td>
+                    <td>@user.Name</td>
+                    <td>@user.Surname</td>
+                    <td>@user.Phone</td>
+                    <td>@user.Email</td>
+                    <td>@user.Age</td>
+                    <td>@user.Weight</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    public Users[] ListOfUsers;
+
+    public SmartWorkoutContext DbContext = new SmartWorkoutContext();
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Simulate asynchronous loading to demonstrate streaming rendering
+       await Task.Delay(500);
+
+        // Retrieve the list of users from the database
+        ListOfUsers = DbContext.Users.ToArray();
+    }
+
+ 
+}
