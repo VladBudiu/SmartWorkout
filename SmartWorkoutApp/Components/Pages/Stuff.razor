@@ -5,13 +5,13 @@
 
 <p role="status">Current number: @currentNumber</p>
 
-<button @onclick="Number">Generate Random Number</button>
+<button class="btn alert-primary" @onclick="Vladus">Generate Random Number</button>
 
 @code {
     private int currentNumber = 0;
     private Random rnd = new Random();
 
-    private void Number()
+    private void Vladus()
     {
         System.Diagnostics.Debug.WriteLine("Interesant");
 

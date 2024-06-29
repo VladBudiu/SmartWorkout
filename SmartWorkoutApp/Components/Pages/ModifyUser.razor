@@ -1,4 +1,5 @@
-﻿@page "/user"
+﻿@page "/modify"
+
 @using SmartWorkout.DataAccess
 @using SmartWorkout.DataAccess.Entities
 @using SmartWorkout.DataAccess.Repositories.UserRepository
@@ -26,6 +27,7 @@ else
                 <th>Email</th>
                 <th>Age</th>
                 <th>Weight</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -39,6 +41,10 @@ else
                     <td>@user.Email</td>
                     <td>@user.Age</td>
                     <td>@user.Weight</td>
+                    <td>
+                        <button @onclick="() => DeleteUser(user.Id)"> Delete </button>
+                        <button>Modify</button>
+                    </td>
                 </tr>
             }
         </tbody>
@@ -46,9 +52,8 @@ else
 }
 
 @code {
-    public [] ListOfUsers;
-    public IEnumerable<> Users;
-
+    public Users[] ListOfUsers;
+    public IEnumerable<Users> Users;
 
     public static SmartWorkoutContext DbContext = new SmartWorkoutContext();
 
@@ -60,13 +65,19 @@ else
         await Task.Delay(500);
 
         // Retrieve the list of users from the database
-
-
-
         Users = await userRepository.GetAllAsync();
         ListOfUsers = Users.ToArray();
 
     }
 
+    public async void DeleteUser(int id)
+    {
+       await userRepository.DeleteByIdAsync(id);
+    }
+
+
  
+
+
+
 }
